@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Rei 💝</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --pink-light: #ffe4f0;
+            --pink-soft: #ffc9e0;
+            --pink-medium: #ff9ec7;
+            --pink-deep: #ff6bb5;
+            --pink-vibrant: #ff3d9a;
+            --cream: #fffbf7;
+            --white: #ffffff;
+            --text-dark: #5a3548;
+            --text-soft: #9d7b8e;
+        }
+
+        body {
+            font-family: 'Lora', serif;
+            background: linear-gradient(135deg, var(--pink-light) 0%, var(--cream) 40%, var(--pink-soft) 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Animated background elements */
+        .background-lilies {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .lily-float {
+            position: absolute;
+            font-size: 50px;
+            opacity: 0;
+            animation: floatUp 15s infinite ease-in-out;
+        }
+
+        .lily-float:nth-child(1) { left: 5%; animation-delay: 0s; animation-duration: 14s; }
+        .lily-float:nth-child(2) { left: 15%; animation-delay: 2s; animation-duration: 18s; }
+        .lily-float:nth-child(3) { left: 30%; animation-delay: 5s; animation-duration: 16s; }
+        .lily-float:nth-child(4) { left: 45%; animation-delay: 1s; animation-duration: 17s; }
+        .lily-float:nth-child(5) { left: 60%; animation-delay: 7s; animation-duration: 15s; }
+        .lily-float:nth-child(6) { left: 75%; animation-delay: 3s; animation-duration: 19s; }
+        .lily-float:nth-child(7) { left: 85%; animation-delay: 6s; animation-duration: 14s; }
+        .lily-float:nth-child(8) { left: 95%; animation-delay: 4s; animation-duration: 16s; }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) rotate(0deg) scale(0.8);
+                opacity: 0;
+            }
+            15% {
+                opacity: 0.4;
+            }
+            85% {
+                opacity: 0.4;
+            }
+            100% {
+                transform: translateY(-150px) rotate(360deg) scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        /* Hearts falling animation */
+        .hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 100;
+            display: none;
+        }
+
+        .hearts-container.active {
+            display: block;
+        }
+
+        .heart-fall {
+            position: absolute;
+            font-size: 30px;
+            animation: heartFall 4s ease-in-out forwards;
+        }
+
+        @keyframes heartFall {
+            0% {
+                transform: translateY(-50px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Main container */
+        .container {
+            position: relative;
+            z-index: 10;
+            width: 90%;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        /* Question Screen */
+        .question-screen {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 60px 40px;
+            box-shadow: 
+                0 30px 80px rgba(255, 61, 154, 0.25),
+                0 0 0 1px rgba(255, 255, 255, 0.9) inset;
+            position: relative;
+            animation: scaleIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .question-screen.hide {
+            animation: scaleOut 0.5s ease-out forwards;
+        }
+
+        @keyframes scaleOut {
+            to {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+        }
+
+        .decorative-heart {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: heartBeat 1.5s ease-in-out infinite;
+        }
+
+        @keyframes heartBeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.1); }
+            50% { transform: scale(1); }
+        }
+
+        .question-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .question-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-soft);
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        /* Buttons */
+        .button-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 18px 50px;
+            font-size: 1.3rem;
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-yes {
+            background: linear-gradient(135deg, var(--pink-vibrant), var(--pink-deep));
+            color: white;
+            box-shadow: 0 10px 30px rgba(255, 61, 154, 0.4);
+        }
+
+        .btn-yes:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(255, 61, 154, 0.5);
+        }
+
+        .btn-yes:active {
+            transform: translateY(-1px) scale(1.02);
+        }
+
+        .btn-no {
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--text-dark);
+            border: 2px solid var(--pink-medium);
+            box-shadow: 0 5px 20px rgba(255, 158, 199, 0.2);
+            transition: all 0.2s ease;
+        }
+
+        .btn-no:hover {
+            background: var(--pink-light);
+            border-color: var(--pink-deep);
+        }
+
+        /* Playful no button states */
+        .btn-no.move {
+            position: absolute;
+            animation: moveAway 0.3s ease-out;
+        }
+
+        @keyframes moveAway {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(var(--move-x), var(--move-y)); }
+        }
+
+        /* Message after "No" */
+        .no-message {
+            margin-top: 25px;
+            font-size: 1.1rem;
+            color: var(--pink-vibrant);
+            font-style: italic;
+            animation: fadeIn 0.5s ease-out;
+            min-height: 30px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Love Letter Screen */
+        .letter-screen {
+            display: none;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 60px 50px;
+            box-shadow: 
+                0 30px 80px rgba(255, 61, 154, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.9) inset;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .letter-screen.show {
+            display: block;
+            animation: slideInUp 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Decorative corner flowers */
+        .corner-flower {
+            position: absolute;
+            font-size: 50px;
+            opacity: 0.2;
+        }
+
+        .corner-flower.top-left { top: 15px; left: 15px; transform: rotate(-20deg); }
+        .corner-flower.top-right { top: 15px; right: 15px; transform: rotate(20deg); }
+        .corner-flower.bottom-left { bottom: 15px; left: 15px; transform: rotate(20deg); }
+        .corner-flower.bottom-right { bottom: 15px; right: 15px; transform: rotate(-20deg); }
+
+        .letter-header {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: fadeIn 1s ease-out 0.3s backwards;
+        }
+
+        .letter-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-style: italic;
+            color: var(--pink-vibrant);
+            margin-bottom: 15px;
+        }
+
+        .letter-subtitle {
+            font-size: 1.5rem;
+            color: var(--text-soft);
+        }
+
+        .letter-content {
+            animation: fadeIn 1s ease-out 0.6s backwards;
+        }
+
+        .salutation {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-style: italic;
+            color: var(--text-dark);
+            margin-bottom: 30px;
+        }
+
+        .message {
+            font-size: 1.15rem;
+            line-height: 2;
+            color: var(--text-dark);
+            text-align: justify;
+            margin-bottom: 40px;
+        }
+
+        .message p {
+            margin-bottom: 1.5em;
+        }
+
+        .signature {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-style: italic;
+            color: var(--pink-vibrant);
+            text-align: right;
+            margin-top: 40px;
+        }
+
+        .date {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 1rem;
+            color: var(--text-soft);
+            font-style: italic;
+        }
+
+        /* Celebration elements */
+        .celebration-message {
+            text-align: center;
+            margin-top: 30px;
+            padding: 25px;
+            background: linear-gradient(135deg, rgba(255, 215, 235, 0.5), rgba(255, 228, 240, 0.5));
+            border-radius: 20px;
+            animation: fadeIn 1s ease-out 0.9s backwards;
+        }
+
+        .celebration-message h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--pink-vibrant);
+            margin-bottom: 10px;
+        }
+
+        .celebration-message p {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .question-screen {
+                padding: 40px 30px;
+            }
+
+            .question-text {
+                font-size: 2rem;
+            }
+
+            .question-subtitle {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: 15px 40px;
+                font-size: 1.1rem;
+            }
+
+            .button-container {
+                gap: 15px;
+            }
+
+            .letter-screen {
+                padding: 40px 30px;
+            }
+
+            .letter-title {
+                font-size: 2.2rem;
+            }
+
+            .letter-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .salutation {
+                font-size: 1.5rem;
+            }
+
+            .message {
+                font-size: 1rem;
+                line-height: 1.8;
+            }
+
+            .signature {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .question-text {
+                font-size: 1.6rem;
+            }
+
+            .decorative-heart {
+                font-size: 60px;
+            }
+
+            .btn {
+                padding: 12px 30px;
+                font-size: 1rem;
+            }
+
+            .letter-title {
+                font-size: 1.8rem;
+            }
+
+            .message {
+                font-size: 0.95rem;
+            }
+
+            .corner-flower {
+                font-size: 35px;
+            }
+        }
+
+        /* Custom scrollbar for letter */
+        .letter-screen::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .letter-screen::-webkit-scrollbar-track {
+            background: rgba(255, 228, 240, 0.3);
+            border-radius: 10px;
+        }
+
+        .letter-screen::-webkit-scrollbar-thumb {
+            background: var(--pink-medium);
+            border-radius: 10px;
+        }
+
+        .letter-screen::-webkit-scrollbar-thumb:hover {
+            background: var(--pink-deep);
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating lilies background -->
+    <div class="background-lilies">
+        <div class="lily-float">🌸</div>
+        <div class="lily-float">🌸</div>
+        <div class="lily-float">🌸</div>
+        <div class="lily-float">🌸</div>
+        <div class="lily-float">🌸</div>
+        <div class="lily-float">🌸</div>
+        <div class="lily-float">🌸</div>
+        <div class="lily-float">🌸</div>
+    </div>
+
+    <!-- Hearts falling animation (shows when Yes is clicked) -->
+    <div class="hearts-container" id="heartsContainer"></div>
+
+    <div class="container">
+        <!-- Question Screen -->
+        <div class="question-screen" id="questionScreen">
+            <div class="decorative-heart">💗</div>
+            <h1 class="question-text">Will you be my Valentine, Rei?</h1>
+            <p class="question-subtitle">Choose wisely... 💕</p>
+            
+            <div class="button-container" id="buttonContainer">
+                <button class="btn btn-yes" id="yesBtn">Yes! 💖</button>
+                <button class="btn btn-no" id="noBtn">No</button>
+            </div>
+
+            <div class="no-message" id="noMessage"></div>
+        </div>
+
+        <!-- Love Letter Screen (hidden initially) -->
+        <div class="letter-screen" id="letterScreen">
+            <div class="corner-flower top-left">🌸</div>
+            <div class="corner-flower top-right">🌸</div>
+            <div class="corner-flower bottom-left">🌸</div>
+            <div class="corner-flower bottom-right">🌸</div>
+
+            <div class="letter-header">
+                <h1 class="letter-title">YAY YOU SAID YES !!</h1>
+                <p class="letter-subtitle">HAPPY VALENTINESS !!</p>
+            </div>
+
+            <div class="letter-content">
+                <div class="salutation">My Dearest, Rei</div>
+                
+                <div class="message">
+                    <!-- 
+                    ============================================
+                    CUSTOMIZE YOUR LOVE LETTER HERE
+                    ============================================
+                    Replace this entire section with your personal message.
+                    Keep the <p> tags for each paragraph.
+                    -->
+                    <p>To my very loving, beautiful, kind, Rei, I’m the happiest person to be able to spend the time that we had. I’ve been the happiest since you, and I’ll be forever be grateful for it.</p>
+
+                    <p>I hope for more valentine's and future -sarries with you, love. This is just a short letter for now, okay? Some more coming soon !! :> </p>
+                </div>
+
+                <div class="signature">
+                    <!-- 
+                    ============================================
+                    CUSTOMIZE YOUR SIGNATURE HERE
+                    ============================================
+                    -->
+                    Forever and Always,<br>
+                    Your Nari Pop
+                </div>
+
+                <div class="date">
+                    <!-- 
+                    ============================================
+                    CUSTOMIZE THE DATE HERE
+                    ============================================
+                    -->
+                    Valentine's Day, February 14, 2026
+                </div>
+            </div>
+
+            <div class="celebration-message">
+                <h3>🎉 You said YES! 🎉</h3>
+                <p>You've made this Valentine's Day absolutely perfect. I can't wait to celebrate with you! 💕</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // JAVASCRIPT FOR INTERACTIVE FUNCTIONALITY
+        // ============================================
+
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const questionScreen = document.getElementById('questionScreen');
+        const letterScreen = document.getElementById('letterScreen');
+        const noMessage = document.getElementById('noMessage');
+        const heartsContainer = document.getElementById('heartsContainer');
+        const buttonContainer = document.getElementById('buttonContainer');
+
+        let noClickCount = 0;
+
+        // Array of playful messages when "No" is clicked
+        const noMessages = [
+            "Are you sure? 🥺",
+            "Really? Think again! 💭",
+            "Come on, you know you want to say yes! 💕",
+            "The correct answer is YES! 😊",
+            "Please? Pretty please? 🙏",
+            "I'll wait for you to change your mind... ⏰",
+            "Don't break my heart! 💔",
+            "One more chance? 🥹",
+            "I know you'll say yes eventually! 💖",
+            "The No button is getting tired... 😴"
+        ];
+
+        // Handle YES button click
+        yesBtn.addEventListener('click', () => {
+            // Create falling hearts animation
+            createFallingHearts();
+            
+            // Hide question screen with animation
+            questionScreen.classList.add('hide');
+            
+            // Show letter screen after animation
+            setTimeout(() => {
+                questionScreen.style.display = 'none';
+                letterScreen.classList.add('show');
+            }, 500);
+        });
+
+        // Handle NO button click
+        noBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            // Show playful message
+            if (noClickCount < noMessages.length) {
+                noMessage.textContent = noMessages[noClickCount];
+            } else {
+                noMessage.textContent = "Okay, I'll keep asking until you say yes! 💕";
+            }
+
+            // Make the No button run away
+            moveButtonAway(noBtn);
+            
+            // Make the Yes button bigger
+            yesBtn.style.transform = `scale(${1 + (noClickCount * 0.1)})`;
+            
+            // Increment counter
+            noClickCount++;
+
+            // After 5 clicks, make No button really hard to click
+            if (noClickCount >= 5) {
+                noBtn.style.padding = '10px 20px';
+                noBtn.style.fontSize = '0.9rem';
+            }
+        });
+
+        // Function to move the No button to a random position
+        function moveButtonAway(button) {
+            const container = buttonContainer.getBoundingClientRect();
+            const btnRect = button.getBoundingClientRect();
+            
+            // Calculate random position within viewport
+            const maxX = window.innerWidth - btnRect.width - 40;
+            const maxY = window.innerHeight - btnRect.height - 40;
+            
+            const randomX = Math.random() * 400 - 200; // Random between -200 and 200
+            const randomY = Math.random() * 400 - 200;
+            
+            // Set CSS variables for animation
+            button.style.setProperty('--move-x', randomX + 'px');
+            button.style.setProperty('--move-y', randomY + 'px');
+            
+            // Add animation class
+            button.classList.add('move');
+            
+            // Reset position after animation
+            setTimeout(() => {
+                button.classList.remove('move');
+            }, 300);
+        }
+
+        // Function to create falling hearts animation
+        function createFallingHearts() {
+            heartsContainer.classList.add('active');
+            
+            // Create 30 hearts
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    createHeart();
+                }, i * 100);
+            }
+            
+            // Stop creating hearts after 3 seconds
+            setTimeout(() => {
+                heartsContainer.classList.remove('active');
+            }, 3000);
+        }
+
+        // Function to create a single falling heart
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart-fall';
+            heart.textContent = ['❤️', '💕', '💖', '💗', '💝'][Math.floor(Math.random() * 5)];
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
+            heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+            
+            heartsContainer.appendChild(heart);
+            
+            // Remove heart after animation
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+
+        // Optional: Make Yes button glow on hover
+        yesBtn.addEventListener('mouseenter', () => {
+            yesBtn.style.boxShadow = '0 15px 50px rgba(255, 61, 154, 0.6)';
+        });
+
+        yesBtn.addEventListener('mouseleave', () => {
+            yesBtn.style.boxShadow = '0 10px 30px rgba(255, 61, 154, 0.4)';
+        });
+
+        // Prevent No button spam clicking
+        let noButtonClickable = true;
+        noBtn.addEventListener('click', () => {
+            if (!noButtonClickable) return;
+            noButtonClickable = false;
+            setTimeout(() => {
+                noButtonClickable = true;
+            }, 500);
+        });
+    </script>
+</body>
+</html>
