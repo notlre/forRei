@@ -66,7 +66,125 @@
             }
         }
 
-        /* Hero Section - Envelope Opening */
+        /* Floating Lilies */
+        .floating-lilies {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .floating-lily {
+            position: absolute;
+            opacity: 0;
+            animation: lily-float 20s infinite;
+        }
+
+        @keyframes lily-float {
+            0% {
+                transform: translateY(110vh) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.4;
+            }
+            90% {
+                opacity: 0.2;
+            }
+            100% {
+                transform: translateY(-10vh) translateX(100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Sparkles */
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--blush);
+            border-radius: 50%;
+            opacity: 0;
+            animation: sparkle 3s infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% {
+                opacity: 0;
+                transform: scale(0);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Glowing hearts */
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .floating-heart {
+            position: absolute;
+            font-size: 20px;
+            opacity: 0;
+            animation: heart-rise 15s infinite;
+        }
+
+        @keyframes heart-rise {
+            0% {
+                transform: translateY(110vh) translateX(0) scale(0.5);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-10vh) translateX(-30px) scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        /* Cursor Spotlight Effect */
+        .cursor-light {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 201, 208, 0.4) 0%, rgba(255, 201, 208, 0.2) 30%, transparent 70%);
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            mix-blend-mode: screen;
+        }
+
+        body:hover .cursor-light {
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .cursor-light {
+                display: none;
+            }
+        }
+
+        /* Hero Section - Beautiful Greeting */
         .hero-section {
             min-height: 100vh;
             display: flex;
@@ -78,70 +196,95 @@
             z-index: 2;
         }
 
-        .envelope-container {
-            perspective: 1000px;
-            margin-bottom: 3rem;
+        .greeting-container {
+            text-align: center;
+            max-width: 800px;
+            opacity: 0;
+            animation: fade-in-scale 1.5s ease-out 0.5s forwards;
         }
 
-        .envelope {
-            width: 280px;
-            height: 180px;
-            position: relative;
-            transform-style: preserve-3d;
-            animation: envelope-appear 1s ease-out;
-        }
-
-        @keyframes envelope-appear {
+        @keyframes fade-in-scale {
             from {
                 opacity: 0;
-                transform: scale(0.8);
+                transform: scale(0.9) translateY(30px);
             }
             to {
                 opacity: 1;
-                transform: scale(1);
+                transform: scale(1) translateY(0);
             }
         }
 
-        .envelope-back {
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, var(--primary-pink), var(--blush));
-            border-radius: 8px;
-            box-shadow: 0 10px 40px rgba(233, 155, 181, 0.3);
+        .greeting-ornament {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+            animation: float-ornament 3s ease-in-out infinite;
         }
 
-        .envelope-flap {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, var(--blush), var(--deep-rose));
-            border-radius: 8px;
-            transform-origin: top center;
-            animation: open-envelope 2s ease-out 1s forwards;
-            box-shadow: 0 5px 20px rgba(233, 155, 181, 0.4);
-        }
-
-        @keyframes open-envelope {
-            to {
-                transform: rotateX(-180deg);
+        @keyframes float-ornament {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
             }
         }
 
-        .letter {
-            position: absolute;
-            top: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 240px;
-            height: 300px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
-            padding: 2rem 1.5rem;
-            opacity: 0;
-            animation: letter-rise 1.5s ease-out 2.5s forwards;
+        .greeting-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 700;
+            color: var(--deep-rose);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            text-shadow: 2px 2px 8px rgba(233, 155, 181, 0.3);
+        }
+
+        .greeting-subtitle {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            color: var(--blush);
+            margin-bottom: 2rem;
+            font-style: italic;
+            font-weight: 400;
+        }
+
+        .greeting-message {
+            font-size: clamp(1rem, 3vw, 1.3rem);
+            line-height: 1.9;
+            color: var(--text-dark);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .greeting-hearts {
+            font-size: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .greeting-hearts span {
+            display: inline-block;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        .greeting-hearts span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .greeting-hearts span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        .greeting-divider {
+            width: 200px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--blush), transparent);
+            margin: 2rem auto;
         }
 
         @keyframes letter-rise {
@@ -155,7 +298,7 @@
             max-width: 600px;
             text-align: center;
             opacity: 0;
-            animation: fade-in-up 1s ease-out 4s forwards;
+            animation: fade-in-up 1s ease-out 2s forwards;
         }
 
         @keyframes fade-in-up {
@@ -171,35 +314,10 @@
 
         .hero-title {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            font-weight: 700;
-            color: var(--deep-rose);
-            margin-bottom: 1.5rem;
-            text-shadow: 2px 2px 4px rgba(233, 155, 181, 0.2);
-        }
-
-        .typewriter-text {
-            font-size: clamp(1rem, 3vw, 1.25rem);
-            line-height: 1.8;
-            color: var(--text-light);
-            overflow: hidden;
-            border-right: 2px solid var(--blush);
-            white-space: nowrap;
-            animation: typing 3.5s steps(60) 4.5s forwards, blink 0.75s step-end infinite;
-            width: 0;
-            margin: 0 auto;
-        }
-
-        @keyframes typing {
-            to {
-                width: 100%;
-            }
-        }
-
-        @keyframes blink {
-            50% {
-                border-color: transparent;
-            }
+            font-size: clamp(1.8rem, 5vw, 3rem);
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
         }
 
         .scroll-indicator {
@@ -208,7 +326,7 @@
             left: 50%;
             transform: translateX(-50%);
             opacity: 0;
-            animation: fade-in-up 1s ease-out 8s forwards;
+            animation: fade-in-up 1s ease-out 3s forwards;
         }
 
         .scroll-indicator svg {
@@ -284,6 +402,29 @@
             transform: translateY(50px);
             transition: all 0.8s ease-out;
             position: relative;
+            overflow: hidden;
+        }
+
+        .memory-item::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 201, 208, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.6s ease;
+            pointer-events: none;
+        }
+
+        .memory-item:hover::before {
+            opacity: 1;
+        }
+
+        .memory-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 70px rgba(233, 155, 181, 0.25);
         }
 
         .memory-item.visible {
@@ -316,6 +457,7 @@
             display: flex;
             flex-direction: column;
             gap: 2rem;
+            align-items: center;
         }
 
         @media (min-width: 768px) {
@@ -327,11 +469,24 @@
 
             .memory-text {
                 flex: 1;
+                min-width: 0;
             }
 
             .memory-image-box {
                 flex-shrink: 0;
-                width: 280px;
+                width: 320px;
+                height: 320px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .memory-section {
+                max-width: 1100px;
+            }
+
+            .memory-image-box {
+                width: 350px;
+                height: 350px;
             }
         }
 
@@ -459,6 +614,16 @@
             box-shadow: 0 8px 25px rgba(233, 155, 181, 0.4);
             transition: all 0.3s ease;
             z-index: 1000;
+            animation: pulse-music 2s infinite;
+        }
+
+        @keyframes pulse-music {
+            0%, 100% {
+                box-shadow: 0 8px 25px rgba(233, 155, 181, 0.4);
+            }
+            50% {
+                box-shadow: 0 8px 35px rgba(233, 155, 181, 0.6);
+            }
         }
 
         .music-control:hover {
@@ -470,6 +635,14 @@
             width: 24px;
             height: 24px;
             fill: white;
+        }
+
+        .music-control.playing {
+            animation: pulse-music 1s infinite;
+        }
+
+        .music-control.paused {
+            animation: none;
         }
 
         /* Decorative Lilies */
@@ -546,18 +719,24 @@
                 width: 100%;
                 height: 250px;
             }
+
+            .floating-lily {
+                width: 30px !important;
+                height: 30px !important;
+            }
+
+            .greeting-ornament {
+                font-size: 2.5rem;
+            }
         }
 
         @media (max-width: 480px) {
-            .envelope {
-                width: 220px;
-                height: 140px;
+            .greeting-ornament {
+                font-size: 2rem;
             }
 
-            .letter {
-                width: 190px;
-                height: 240px;
-                padding: 1.5rem 1rem;
+            .greeting-message {
+                font-size: 0.95rem;
             }
 
             .memory-item {
@@ -571,12 +750,25 @@
             .image-placeholder-icon {
                 font-size: 2.5rem;
             }
+
+            .floating-heart {
+                font-size: 16px !important;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Cursor Spotlight -->
+    <div class="cursor-light" id="cursorLight"></div>
+
     <!-- Floating Petals -->
     <div class="petals-container" id="petalsContainer"></div>
+    
+    <!-- Floating Lilies -->
+    <div class="floating-lilies" id="floatingLilies"></div>
+    
+    <!-- Floating Hearts -->
+    <div class="floating-hearts" id="floatingHearts"></div>
 
     <!-- Decorative Lilies -->
     <svg class="lily-decoration lily-top-left" viewBox="0 0 200 200" fill="none">
@@ -596,17 +788,25 @@
 
     <!-- Hero Section -->
     <section class="hero-section">
-        <div class="envelope-container">
-            <div class="envelope">
-                <div class="envelope-back"></div>
-                <div class="envelope-flap"></div>
-                <div class="letter"></div>
+        <div class="greeting-container">
+            <span class="greeting-ornament">🌸✨🌸</span>
+            <h1 class="greeting-title">Happy Hearts Day</h1>
+            <h2 class="greeting-subtitle">& 1st Monthsary!</h2>
+            <div class="greeting-divider"></div>
+            <p class="greeting-message">
+                To my dearest love, every moment with you feels like a beautiful dream come true. 
+                This marks the beginning of our forever—a journey filled with endless love, 
+                laughter, and countless cherished memories. You are my heart, my home, and my happily ever after.
+            </p>
+            <div class="greeting-hearts">
+                <span>💕</span>
+                <span>💖</span>
+                <span>💕</span>
             </div>
         </div>
 
         <div class="hero-message">
-            <h1 class="hero-title">To My Dearest Love</h1>
-            <p class="typewriter-text">Every moment with you is a cherished memory ♡</p>
+            <h3 class="hero-title">Our Beautiful Love Story</h3>
         </div>
 
         <div class="scroll-indicator">
@@ -808,7 +1008,118 @@
             }
         }
 
+        // Create floating lilies
+        function createFloatingLilies() {
+            const container = document.getElementById('floatingLilies');
+            const lilyCount = window.innerWidth < 768 ? 3 : 6;
+            
+            for (let i = 0; i < lilyCount; i++) {
+                const lily = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                lily.classList.add('floating-lily');
+                lily.setAttribute('viewBox', '0 0 200 200');
+                lily.setAttribute('width', Math.random() * 40 + 40);
+                lily.setAttribute('height', Math.random() * 40 + 40);
+                
+                // Create lily petals
+                const petal1 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                petal1.setAttribute('d', 'M100,180 Q80,120 100,60 Q120,120 100,180');
+                petal1.setAttribute('fill', 'var(--primary-pink)');
+                petal1.setAttribute('opacity', '0.3');
+                
+                const petal2 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                petal2.setAttribute('d', 'M100,60 Q60,80 40,100 Q80,90 100,60');
+                petal2.setAttribute('fill', 'var(--blush)');
+                petal2.setAttribute('opacity', '0.4');
+                
+                const petal3 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                petal3.setAttribute('d', 'M100,60 Q140,80 160,100 Q120,90 100,60');
+                petal3.setAttribute('fill', 'var(--blush)');
+                petal3.setAttribute('opacity', '0.4');
+                
+                const center = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                center.setAttribute('cx', '100');
+                center.setAttribute('cy', '50');
+                center.setAttribute('r', '8');
+                center.setAttribute('fill', 'var(--deep-rose)');
+                center.setAttribute('opacity', '0.5');
+                
+                lily.appendChild(petal1);
+                lily.appendChild(petal2);
+                lily.appendChild(petal3);
+                lily.appendChild(center);
+                
+                lily.style.left = Math.random() * 100 + '%';
+                lily.style.animationDelay = Math.random() * 20 + 's';
+                lily.style.animationDuration = (Math.random() * 15 + 20) + 's';
+                
+                container.appendChild(lily);
+            }
+        }
+
+        // Create floating hearts
+        function createFloatingHearts() {
+            const container = document.getElementById('floatingHearts');
+            const heartCount = window.innerWidth < 768 ? 4 : 8;
+            
+            for (let i = 0; i < heartCount; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('floating-heart');
+                heart.textContent = ['💕', '💖', '💗', '💝'][Math.floor(Math.random() * 4)];
+                
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 15 + 's';
+                heart.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                
+                container.appendChild(heart);
+            }
+        }
+
+        // Add sparkles to memory items when they appear
+        function addSparkles(element) {
+            const sparkleCount = 8;
+            for (let i = 0; i < sparkleCount; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.classList.add('sparkle');
+                sparkle.style.left = Math.random() * 100 + '%';
+                sparkle.style.top = Math.random() * 100 + '%';
+                sparkle.style.animationDelay = Math.random() * 3 + 's';
+                element.appendChild(sparkle);
+            }
+        }
+
+        // Cursor spotlight effect
+        const cursorLight = document.getElementById('cursorLight');
+        let mouseX = 0;
+        let mouseY = 0;
+        let currentX = 0;
+        let currentY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        function animateCursor() {
+            // Smooth follow effect
+            currentX += (mouseX - currentX) * 0.1;
+            currentY += (mouseY - currentY) * 0.1;
+            
+            cursorLight.style.left = currentX + 'px';
+            cursorLight.style.top = currentY + 'px';
+            
+            requestAnimationFrame(animateCursor);
+        }
+
+        animateCursor();
+
         createPetals();
+        createFloatingLilies();
+        createFloatingHearts();
+
+        // Add sparkles to memory items
+        document.querySelectorAll('.memory-item').forEach(item => {
+            addSparkles(item);
+        });
 
         // Intersection Observer for scroll animations
         const observerOptions = {
@@ -841,26 +1152,59 @@
             }
         }
 
-        // Music control
+        // Enhanced Music Control with Autoplay
         let isMusicPlaying = false;
         const musicControl = document.getElementById('musicControl');
         const musicIcon = document.getElementById('musicIcon');
 
-        // Note: Add your music file URL here
-        // const audio = new Audio('your-music-file.mp3');
-        // audio.loop = true;
+        // SETUP INSTRUCTIONS:
+        // 1. Place your music file (MP3, WAV, or OGG format) in the same folder as this HTML file
+        // 2. Replace 'your-music-file.mp3' below with your actual filename
+        // 3. For example: const audio = new Audio('romantic-song.mp3');
+        
+        // Uncomment and edit the line below:
+        const audio = new Audio('song.mp3');
+        
+        // For testing, you can use a placeholder URL:
+        // const audio = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
+        
+        // Once you uncomment the audio line above, uncomment the code below:
+        
+        
+        audio.loop = true;
+        audio.volume = 0.3; // Set volume to 30% (adjust between 0.0 and 1.0)
 
-        musicControl.addEventListener('click', () => {
-            isMusicPlaying = !isMusicPlaying;
-            
-            if (isMusicPlaying) {
+        // Attempt autoplay when page loads
+        window.addEventListener('load', () => {
+            // Try to play automatically
+            audio.play().then(() => {
+                isMusicPlaying = true;
+                musicControl.classList.add('playing');
                 musicIcon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
-                // audio.play();
-            } else {
-                musicIcon.innerHTML = '<path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>';
-                // audio.pause();
-            }
+            }).catch(() => {
+                // Autoplay blocked by browser - user needs to click
+                console.log('Autoplay blocked. Click the music button to play.');
+                isMusicPlaying = false;
+                musicControl.classList.add('paused');
+            });
         });
+
+        // Music control button click handler
+        musicControl.addEventListener('click', () => {
+            if (isMusicPlaying) {
+                audio.pause();
+                musicIcon.innerHTML = '<path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>';
+                musicControl.classList.remove('playing');
+                musicControl.classList.add('paused');
+            } else {
+                audio.play();
+                musicIcon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
+                musicControl.classList.remove('paused');
+                musicControl.classList.add('playing');
+            }
+            isMusicPlaying = !isMusicPlaying;
+        });
+        
 
         // Smooth scroll behavior
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
