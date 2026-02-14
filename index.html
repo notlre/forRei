@@ -3,18 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For My Love ♡</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Playfair+Display:wght@400;600;700&family=Quicksand:wght@300;400;500&display=swap" rel="stylesheet">
+    <title>For My Dearest Love ♡</title>
+    <link href="https://fonts.googleapis.com/css2?family=Alike+Angular&family=Cormorant:ital,wght@0,300;0,400;0,600;1,400&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <style>
         :root {
-            --primary-pink: #ffc9d0;
-            --soft-pink: #ffe5e9;
-            --blush: #ffb3c1;
-            --pastel-pink: #fff0f3;
-            --deep-rose: #e89bb5;
-            --text-dark: #5a4a4a;
-            --text-light: #8a7070;
-            --white: #ffffff;
+            --rose-quartz: #f7cad0;
+            --blush: #fae1dd;
+            --champagne: #fff1e6;
+            --seashell: #fde2e4;
+            --pearl: #ffd7e0;
+            --deep-rose: #d4426b;
+            --wine: #a4254d;
+            --midnight: #2d132c;
+            --text-dark: #3a2e39;
+            --text-light: #746c74;
         }
 
         * {
@@ -24,15 +29,40 @@
         }
 
         body {
-            font-family: 'Quicksand', sans-serif;
-            background: linear-gradient(135deg, var(--pastel-pink) 0%, var(--soft-pink) 50%, #fff5f7 100%);
+            font-family: 'IBM Plex Sans', sans-serif;
+            background: linear-gradient(135deg, var(--champagne), var(--blush), var(--seashell));
             color: var(--text-dark);
             overflow-x: hidden;
-            scroll-behavior: smooth;
+            cursor: none;
         }
 
-        /* Floating Petals Background */
-        .petals-container {
+        /* Custom Cursor */
+        .custom-cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--deep-rose);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10000;
+            transition: all 0.1s ease;
+            mix-blend-mode: difference;
+        }
+
+        .cursor-follower {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--rose-quartz);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.15s ease;
+            opacity: 0.5;
+        }
+
+        /* Particle Canvas */
+        #particles-canvas {
             position: fixed;
             top: 0;
             left: 0;
@@ -40,152 +70,28 @@
             height: 100%;
             pointer-events: none;
             z-index: 1;
-            overflow: hidden;
         }
 
-        .petal {
-            position: absolute;
-            opacity: 0;
-            animation: float-down 15s infinite;
-        }
-
-        @keyframes float-down {
-            0% {
-                transform: translateY(-10vh) translateX(0) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.6;
-            }
-            90% {
-                opacity: 0.3;
-            }
-            100% {
-                transform: translateY(110vh) translateX(50px) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        /* Floating Lilies */
-        .floating-lilies {
+        /* Progress Bar */
+        .progress-bar {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-            overflow: hidden;
-        }
-
-        .floating-lily {
-            position: absolute;
-            opacity: 0;
-            animation: lily-float 20s infinite;
-        }
-
-        @keyframes lily-float {
-            0% {
-                transform: translateY(110vh) translateX(0) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.4;
-            }
-            90% {
-                opacity: 0.2;
-            }
-            100% {
-                transform: translateY(-10vh) translateX(100px) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        /* Sparkles */
-        .sparkle {
-            position: absolute;
-            width: 4px;
             height: 4px;
-            background: var(--blush);
-            border-radius: 50%;
-            opacity: 0;
-            animation: sparkle 3s infinite;
+            background: linear-gradient(90deg, var(--deep-rose), var(--wine));
+            z-index: 1000;
+            transform-origin: left;
+            box-shadow: 0 2px 10px rgba(212, 66, 107, 0.5);
         }
 
-        @keyframes sparkle {
-            0%, 100% {
-                opacity: 0;
-                transform: scale(0);
-            }
-            50% {
-                opacity: 1;
-                transform: scale(1);
-            }
+        /* Main Container */
+        #root {
+            position: relative;
+            z-index: 2;
         }
 
-        /* Glowing hearts */
-        .floating-hearts {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-            overflow: hidden;
-        }
-
-        .floating-heart {
-            position: absolute;
-            font-size: 20px;
-            opacity: 0;
-            animation: heart-rise 15s infinite;
-        }
-
-        @keyframes heart-rise {
-            0% {
-                transform: translateY(110vh) translateX(0) scale(0.5);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.6;
-            }
-            90% {
-                opacity: 0.3;
-            }
-            100% {
-                transform: translateY(-10vh) translateX(-30px) scale(1.2);
-                opacity: 0;
-            }
-        }
-
-        /* Cursor Spotlight Effect */
-        .cursor-light {
-            position: fixed;
-            width: 600px;
-            height: 600px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(255, 201, 208, 0.4) 0%, rgba(255, 201, 208, 0.2) 30%, transparent 70%);
-            pointer-events: none;
-            transform: translate(-50%, -50%);
-            z-index: 999;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            mix-blend-mode: screen;
-        }
-
-        body:hover .cursor-light {
-            opacity: 1;
-        }
-
-        @media (max-width: 768px) {
-            .cursor-light {
-                display: none;
-            }
-        }
-
-        /* Hero Section - Beautiful Greeting */
-        .hero-section {
+        /* Hero Section */
+        .hero {
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -193,362 +99,409 @@
             justify-content: center;
             padding: 2rem;
             position: relative;
-            z-index: 2;
+            overflow: hidden;
         }
 
-        .greeting-container {
-            text-align: center;
+        .hero-blob {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(247, 202, 208, 0.4), transparent);
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+            filter: blur(40px);
+            animation: morph 20s infinite alternate;
+        }
+
+        @keyframes morph {
+            0%, 100% {
+                border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+                transform: translate(0, 0) rotate(0deg);
+            }
+            50% {
+                border-radius: 70% 30% 50% 50% / 30% 40% 60% 70%;
+                transform: translate(50px, -50px) rotate(180deg);
+            }
+        }
+
+        .greeting-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 30px;
+            padding: 4rem 3rem;
             max-width: 800px;
-            opacity: 0;
-            animation: fade-in-scale 1.5s ease-out 0.5s forwards;
-        }
-
-        @keyframes fade-in-scale {
-            from {
-                opacity: 0;
-                transform: scale(0.9) translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-            }
+            text-align: center;
+            box-shadow: 
+                0 10px 30px rgba(212, 66, 107, 0.1),
+                0 20px 60px rgba(212, 66, 107, 0.05),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            position: relative;
+            z-index: 2;
+            transform-style: preserve-3d;
+            transition: transform 0.3s ease;
         }
 
         .greeting-ornament {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            display: block;
-            animation: float-ornament 3s ease-in-out infinite;
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            animation: float 4s ease-in-out infinite;
+            filter: drop-shadow(0 5px 15px rgba(212, 66, 107, 0.3));
         }
 
-        @keyframes float-ornament {
+        @keyframes float {
             0%, 100% {
-                transform: translateY(0);
+                transform: translateY(0) rotate(0deg);
             }
             50% {
-                transform: translateY(-10px);
-            }
-        }
-
-        .greeting-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2.5rem, 8vw, 5rem);
-            font-weight: 700;
-            color: var(--deep-rose);
-            margin-bottom: 1rem;
-            line-height: 1.2;
-            text-shadow: 2px 2px 8px rgba(233, 155, 181, 0.3);
-        }
-
-        .greeting-subtitle {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(1.5rem, 4vw, 2.5rem);
-            color: var(--blush);
-            margin-bottom: 2rem;
-            font-style: italic;
-            font-weight: 400;
-        }
-
-        .greeting-message {
-            font-size: clamp(1rem, 3vw, 1.3rem);
-            line-height: 1.9;
-            color: var(--text-dark);
-            margin-bottom: 2rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .greeting-hearts {
-            font-size: 2rem;
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .greeting-hearts span {
-            display: inline-block;
-            animation: heartbeat 1.5s infinite;
-        }
-
-        .greeting-hearts span:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-
-        .greeting-hearts span:nth-child(3) {
-            animation-delay: 0.4s;
-        }
-
-        .greeting-divider {
-            width: 200px;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, var(--blush), transparent);
-            margin: 2rem auto;
-        }
-
-        @keyframes letter-rise {
-            to {
-                top: -100px;
-                opacity: 1;
-            }
-        }
-
-        .hero-message {
-            max-width: 600px;
-            text-align: center;
-            opacity: 0;
-            animation: fade-in-up 1s ease-out 2s forwards;
-        }
-
-        @keyframes fade-in-up {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+                transform: translateY(-20px) rotate(5deg);
             }
         }
 
         .hero-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(1.8rem, 5vw, 3rem);
+            font-family: 'Cormorant', serif;
+            font-size: clamp(3rem, 8vw, 6rem);
             font-weight: 600;
-            color: var(--text-dark);
+            background: linear-gradient(135deg, var(--deep-rose), var(--wine), var(--deep-rose));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-bottom: 1rem;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
         }
 
-        .scroll-indicator {
-            position: absolute;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            opacity: 0;
-            animation: fade-in-up 1s ease-out 3s forwards;
+        .hero-subtitle {
+            font-family: 'Cormorant', serif;
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            font-style: italic;
+            color: var(--wine);
+            margin-bottom: 2rem;
+            opacity: 0.9;
         }
 
-        .scroll-indicator svg {
-            width: 30px;
-            height: 30px;
-            animation: bounce 2s infinite;
+        .hero-message {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            line-height: 1.8;
+            color: var(--text-dark);
+            max-width: 600px;
+            margin: 0 auto 2rem;
         }
 
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateY(0);
+        .hearts-container {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .heart {
+            font-size: 2rem;
+            animation: heartbeat 1.5s infinite;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .heart:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .heart:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        .heart:hover {
+            transform: scale(1.3);
+        }
+
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
             }
-            40% {
-                transform: translateY(-10px);
+            10%, 30% {
+                transform: scale(1.15);
             }
-            60% {
-                transform: translateY(-5px);
+            20%, 40% {
+                transform: scale(1);
             }
         }
 
-        /* Memory Section */
-        .memory-section {
-            padding: 4rem 2rem;
+        /* Timeline Section */
+        .timeline-section {
+            padding: 8rem 2rem;
             position: relative;
-            z-index: 2;
-            max-width: 900px;
-            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 6rem;
         }
 
         .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2rem, 5vw, 3rem);
-            text-align: center;
+            font-family: 'Cormorant', serif;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 600;
             color: var(--deep-rose);
             margin-bottom: 1rem;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
+            position: relative;
+            display: inline-block;
         }
 
-        .section-title.visible {
-            opacity: 1;
-            transform: translateY(0);
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--deep-rose), transparent);
         }
 
         .section-subtitle {
-            text-align: center;
-            font-size: clamp(1rem, 2.5vw, 1.2rem);
-            color: var(--text-light);
-            margin-bottom: 4rem;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out 0.2s;
-        }
-
-        .section-subtitle.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .memory-timeline {
-            display: flex;
-            flex-direction: column;
-            gap: 4rem;
-        }
-
-        .memory-item {
-            background: white;
-            border-radius: 20px;
-            padding: 2.5rem;
-            box-shadow: 0 20px 60px rgba(233, 155, 181, 0.15);
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s ease-out;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .memory-item::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 201, 208, 0.1) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.6s ease;
-            pointer-events: none;
-        }
-
-        .memory-item:hover::before {
-            opacity: 1;
-        }
-
-        .memory-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 25px 70px rgba(233, 155, 181, 0.25);
-        }
-
-        .memory-item.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .memory-item:nth-child(even) {
-            background: linear-gradient(135deg, rgba(255, 240, 243, 0.5), rgba(255, 255, 255, 0.9));
-        }
-
-        .memory-header {
-            margin-bottom: 1.5rem;
-        }
-
-        .memory-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(1.5rem, 4vw, 2.2rem);
-            color: var(--deep-rose);
-            margin-bottom: 0.5rem;
-        }
-
-        .memory-date {
-            font-size: 0.95rem;
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
             color: var(--text-light);
             font-style: italic;
         }
 
-        .memory-content-wrapper {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-            align-items: center;
+        /* Timeline */
+        .timeline {
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        @media (min-width: 768px) {
-            .memory-content-wrapper {
-                flex-direction: row;
-                align-items: flex-start;
-                gap: 2.5rem;
-            }
-
-            .memory-text {
-                flex: 1;
-                min-width: 0;
-            }
-
-            .memory-image-box {
-                flex-shrink: 0;
-                width: 320px;
-                height: 320px;
-            }
+        .timeline-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 8rem;
+            position: relative;
         }
 
-        @media (min-width: 1024px) {
-            .memory-section {
-                max-width: 1100px;
-            }
-
-            .memory-image-box {
-                width: 350px;
-                height: 350px;
-            }
+        .timeline-item:nth-child(odd) .timeline-content {
+            order: 1;
         }
 
-        .memory-description {
+        .timeline-item:nth-child(odd) .timeline-image {
+            order: 2;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            order: 2;
+        }
+
+        .timeline-item:nth-child(even) .timeline-image {
+            order: 1;
+        }
+
+        .timeline-content {
+            background: white;
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: 
+                0 5px 15px rgba(0, 0, 0, 0.05),
+                0 15px 35px rgba(212, 66, 107, 0.1);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--deep-rose), var(--wine));
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.08),
+                0 20px 50px rgba(212, 66, 107, 0.15);
+        }
+
+        .content-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .content-title {
+            font-family: 'Cormorant', serif;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 600;
+            color: var(--deep-rose);
+            margin-bottom: 0.5rem;
+        }
+
+        .content-date {
+            font-size: 1rem;
+            color: var(--text-light);
+            font-style: italic;
+        }
+
+        .content-text {
             line-height: 1.9;
             color: var(--text-dark);
             font-size: 1.05rem;
-            margin-bottom: 1rem;
         }
 
-        .memory-image-box {
-            width: 100%;
-            height: 280px;
-            border-radius: 15px;
-            overflow: hidden;
-            cursor: pointer;
+        .footer {
+            background: linear-gradient(135deg, rgba(247, 202, 208, 0.5), rgba(250, 225, 221, 0.5));
+            backdrop-filter: blur(10px);
+            padding: 5rem 2rem 3rem;
+            margin-top: 8rem;
+            text-align: center;
             position: relative;
-            background: linear-gradient(135deg, var(--soft-pink), var(--pastel-pink));
-            border: 3px dashed var(--blush);
-            transition: all 0.4s ease;
+            overflow: hidden;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--deep-rose), var(--wine), var(--deep-rose), transparent);
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-hearts {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .footer-hearts span {
+            animation: heartbeat 1.5s infinite;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .footer-hearts span:hover {
+            transform: scale(1.3);
+        }
+
+        .footer-hearts span:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+
+        .footer-hearts span:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+
+        .footer-message {
+            font-family: 'Cormorant', serif;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            color: var(--wine);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        .footer-submessage {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .footer-signature {
+            font-family: 'Cormorant', serif;
+            font-size: 1.8rem;
+            color: var(--deep-rose);
+            font-style: italic;
+            margin: 3rem 0 1rem;
+        }
+
+        .footer-date {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(212, 66, 107, 0.2);
+        }
+
+        /* Photo Gallery Card */
+        .timeline-image {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            height: 500px;
+            cursor: pointer;
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.1),
+                0 20px 60px rgba(212, 66, 107, 0.1);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .timeline-image:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 
+                0 15px 40px rgba(0, 0, 0, 0.15),
+                0 30px 80px rgba(212, 66, 107, 0.15);
+        }
+
+        .image-wrapper {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--blush), var(--seashell));
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-
-        .memory-image-box:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(233, 155, 181, 0.3);
-            border-color: var(--deep-rose);
+            position: relative;
+            overflow: hidden;
         }
 
         .image-placeholder {
             text-align: center;
-            padding: 2rem;
-            transition: all 0.4s ease;
+            z-index: 2;
+            position: relative;
         }
 
-        .image-placeholder-icon {
-            font-size: 3rem;
+        .placeholder-icon {
+            font-size: 5rem;
             margin-bottom: 1rem;
-            display: block;
+            animation: float 3s ease-in-out infinite;
         }
 
-        .image-placeholder-text {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.1rem;
+        .placeholder-text {
+            font-family: 'Cormorant', serif;
+            font-size: 1.5rem;
             color: var(--deep-rose);
-            font-weight: 500;
+            margin-bottom: 1rem;
         }
 
-        .image-placeholder-hint {
-            font-size: 0.85rem;
-            color: var(--text-light);
-            margin-top: 0.5rem;
+        .click-hint {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            font-size: 0.9rem;
+            color: var(--wine);
+            border: 2px dashed var(--rose-quartz);
+            transition: all 0.3s ease;
         }
 
-        .memory-image-box.revealed .image-placeholder {
-            opacity: 0;
-            transform: scale(0.8);
+        .image-wrapper:hover .click-hint {
+            border-color: var(--deep-rose);
+            border-style: solid;
+            background: white;
+            transform: scale(1.05);
         }
 
-        .memory-photo {
+        .actual-photo {
             position: absolute;
             top: 0;
             left: 0;
@@ -557,641 +510,482 @@
             object-fit: cover;
             opacity: 0;
             transform: scale(0.9);
-            transition: all 0.6s ease;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .memory-image-box.revealed {
-            border-style: solid;
-            border-color: var(--deep-rose);
-        }
-
-        .memory-image-box.revealed .memory-photo {
+        .actual-photo.revealed {
             opacity: 1;
             transform: scale(1);
         }
 
-        .reveal-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, var(--primary-pink), var(--blush));
+        .image-placeholder.hidden {
             opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
+            transform: scale(0.8);
         }
 
-        .memory-image-box.revealed .reveal-overlay {
-            animation: flash-reveal 0.6s ease;
-        }
-
-        @keyframes flash-reveal {
-            0% {
-                opacity: 0;
-            }
-            50% {
-                opacity: 0.8;
-            }
-            100% {
-                opacity: 0;
-            }
-        }
-
-        /* Music Control */
-        .music-control {
+        /* Floating Music Button */
+        .music-fab {
             position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--primary-pink), var(--blush));
+            bottom: 3rem;
+            right: 3rem;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--deep-rose), var(--wine));
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            box-shadow: 0 8px 25px rgba(233, 155, 181, 0.4);
-            transition: all 0.3s ease;
+            box-shadow: 
+                0 10px 30px rgba(212, 66, 107, 0.3),
+                0 20px 60px rgba(212, 66, 107, 0.2);
             z-index: 1000;
+            border: 3px solid white;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .music-fab:hover {
+            transform: scale(1.1) rotate(15deg);
+            box-shadow: 
+                0 15px 40px rgba(212, 66, 107, 0.4),
+                0 30px 80px rgba(212, 66, 107, 0.3);
+        }
+
+        .music-fab.playing {
             animation: pulse-music 2s infinite;
         }
 
         @keyframes pulse-music {
             0%, 100% {
-                box-shadow: 0 8px 25px rgba(233, 155, 181, 0.4);
+                transform: scale(1);
             }
             50% {
-                box-shadow: 0 8px 35px rgba(233, 155, 181, 0.6);
+                transform: scale(1.08);
             }
         }
 
-        .music-control:hover {
-            transform: scale(1.1);
-            box-shadow: 0 12px 35px rgba(233, 155, 181, 0.5);
-        }
-
-        .music-control svg {
-            width: 24px;
-            height: 24px;
+        .music-icon {
+            width: 35px;
+            height: 35px;
             fill: white;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
         }
 
-        .music-control.playing {
-            animation: pulse-music 1s infinite;
+        /* Mobile Responsiveness */
+        @media (max-width: 968px) {
+            .timeline-item {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                margin-bottom: 4rem;
+            }
+
+            .timeline-item:nth-child(odd) .timeline-content,
+            .timeline-item:nth-child(even) .timeline-content,
+            .timeline-item:nth-child(odd) .timeline-image,
+            .timeline-item:nth-child(even) .timeline-image {
+                order: initial;
+            }
+
+            .greeting-card {
+                padding: 3rem 2rem;
+            }
+
+            .timeline-image {
+                height: 350px;
+            }
+
+            body {
+                cursor: auto;
+            }
+
+            .custom-cursor,
+            .cursor-follower {
+                display: none;
+            }
         }
 
-        .music-control.paused {
-            animation: none;
-        }
-
-        /* Decorative Lilies */
-        .lily-decoration {
+        /* Loading Animation */
+        .page-loader {
             position: fixed;
-            opacity: 0.15;
-            pointer-events: none;
-            z-index: 0;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--champagne), var(--blush));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
         }
 
-        .lily-top-left {
-            top: 10%;
-            left: 5%;
-            width: 150px;
-            transform: rotate(-15deg);
+        .page-loader.hidden {
+            opacity: 0;
+            visibility: hidden;
         }
 
-        .lily-bottom-right {
-            bottom: 10%;
-            right: 5%;
-            width: 180px;
-            transform: rotate(15deg);
+        .loader-heart {
+            font-size: 5rem;
+            animation: heartbeat 1s infinite;
         }
 
-        @media (max-width: 768px) {
-            .lily-decoration {
-                opacity: 0.08;
-            }
-            
-            .lily-top-left {
-                width: 100px;
-            }
-            
-            .lily-bottom-right {
-                width: 120px;
-            }
+        /* Scroll Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: 3rem 2rem;
-            font-size: 0.9rem;
-            color: var(--text-light);
-            position: relative;
-            z-index: 2;
-        }
-
-        .footer-heart {
-            display: inline-block;
-            color: var(--deep-rose);
-            animation: heartbeat 1.5s infinite;
-        }
-
-        @keyframes heartbeat {
-            0%, 100% {
-                transform: scale(1);
-            }
-            10%, 30% {
-                transform: scale(1.2);
-            }
-            20%, 40% {
-                transform: scale(1);
-            }
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .memory-content-wrapper {
-                flex-direction: column-reverse;
-            }
-
-            .memory-image-box {
-                width: 100%;
-                height: 250px;
-            }
-
-            .floating-lily {
-                width: 30px !important;
-                height: 30px !important;
-            }
-
-            .greeting-ornament {
-                font-size: 2.5rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .greeting-ornament {
-                font-size: 2rem;
-            }
-
-            .greeting-message {
-                font-size: 0.95rem;
-            }
-
-            .memory-item {
-                padding: 1.5rem;
-            }
-
-            .memory-image-box {
-                height: 220px;
-            }
-
-            .image-placeholder-icon {
-                font-size: 2.5rem;
-            }
-
-            .floating-heart {
-                font-size: 16px !important;
-            }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
 <body>
-    <!-- Cursor Spotlight -->
-    <div class="cursor-light" id="cursorLight"></div>
-
-    <!-- Floating Petals -->
-    <div class="petals-container" id="petalsContainer"></div>
-    
-    <!-- Floating Lilies -->
-    <div class="floating-lilies" id="floatingLilies"></div>
-    
-    <!-- Floating Hearts -->
-    <div class="floating-hearts" id="floatingHearts"></div>
-
-    <!-- Decorative Lilies -->
-    <svg class="lily-decoration lily-top-left" viewBox="0 0 200 200" fill="none">
-        <path d="M100,180 Q80,120 100,60 Q120,120 100,180" fill="var(--primary-pink)" opacity="0.3"/>
-        <path d="M100,60 Q60,80 40,100 Q80,90 100,60" fill="var(--blush)" opacity="0.4"/>
-        <path d="M100,60 Q140,80 160,100 Q120,90 100,60" fill="var(--blush)" opacity="0.4"/>
-        <path d="M100,80 Q90,100 85,120 Q95,110 100,80" fill="var(--deep-rose)" opacity="0.3"/>
-        <circle cx="100" cy="50" r="8" fill="var(--deep-rose)" opacity="0.5"/>
-    </svg>
-
-    <svg class="lily-decoration lily-bottom-right" viewBox="0 0 200 200" fill="none">
-        <path d="M100,180 Q80,120 100,60 Q120,120 100,180" fill="var(--primary-pink)" opacity="0.3"/>
-        <path d="M100,60 Q60,80 40,100 Q80,90 100,60" fill="var(--blush)" opacity="0.4"/>
-        <path d="M100,60 Q140,80 160,100 Q120,90 100,60" fill="var(--blush)" opacity="0.4"/>
-        <circle cx="100" cy="50" r="8" fill="var(--deep-rose)" opacity="0.5"/>
-    </svg>
-
-    <!-- Hero Section -->
-    <section class="hero-section">
-        <div class="greeting-container">
-            <span class="greeting-ornament">🌸✨🌸</span>
-            <h1 class="greeting-title">Happy Hearts Day</h1>
-            <h2 class="greeting-subtitle">& 1st Monthsary!</h2>
-            <div class="greeting-divider"></div>
-            <p class="greeting-message">
-                For the girl I love most, Happy Hearts and 1st Monthsary to us! I'm very glad to spend this moment with you, rei. I love you.
-            </p>
-            <div class="greeting-hearts">
-                <span>💕</span>
-                <span>💖</span>
-                <span>💕</span>
-            </div>
-        </div>
-
-        <div class="hero-message">
-            <h3 class="hero-title"></h3>
-        </div>
-
-        <div class="scroll-indicator">
-            <svg viewBox="0 0 24 24" fill="none" stroke="var(--deep-rose)" stroke-width="2">
-                <path d="M12 5v14M19 12l-7 7-7-7"/>
-            </svg>
-        </div>
-    </section>
-
-    <!-- Memory Section -->
-    <section class="memory-section">
-        <h2 class="section-title">A love letter, for myLove</h2>
-        <p class="section-subtitle">Scroll po baby, carefully, gracefully, and as beautiful as you do. ♡</p>
-
-        <div class="memory-timeline">
-            <!-- First Date Memory -->
-            <div class="memory-item">
-                <div class="memory-header">
-                    <h3 class="memory-title">Time Went by so Fast</h3>
-                    <p class="memory-date">Hopes for this time to Last Forever</p>
-                </div>
-                <div class="memory-content-wrapper">
-                    <div class="memory-text">
-                        <p class="memory-description">
-                            Happy 1st monthsarry, my Lovee !!! Time really went by so fast. I still remember dati where I still feel embarrassed just by being in the same room as you, tho embarrassing to admit, I was always tensed whenever you were around that time T_T and now, we’re officially together celebrating our 1st month together. Though things might have been very hectic for this celebration, I’m still very glad —hoping that you are tooooo, to everything. To the efforts, thoughts, and love that we give each other.
-                            I feel so happy being able to greet you for our first month and first valentine oficially together :>
-                        </p>
-                    </div>
-                    <div class="memory-image-box" onclick="revealPhoto(this)">
-                        <div class="image-placeholder">
-                            <span class="image-placeholder-icon">🌸</span>
-                            <div class="image-placeholder-text"></div>
-                            <div class="image-placeholder-hint">Click to reveal</div>
-                        </div>
-                        <img class="memory-photo" src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=800&q=80" alt="Our First Date">
-                        <div class="reveal-overlay"></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Favorite Memory -->
-            <div class="memory-item">
-                <div class="memory-header">
-                    <h3 class="memory-title">Our Story Together</h3>
-                    <p class="memory-date">Lots of First Times, and More First Times</p>
-                </div>
-                <div class="memory-content-wrapper">
-                    <div class="memory-text">
-                        <p class="memory-description">
-                            Our first month officially together, but almost a lifetime worth of memories with you. We been together for almost a year na, bunn, still can't believe it T_T.
-                            Countless amount of dates, Mcdo, Jollibees, cafes, and I'm glad to admit that all of them have been my first with you. To be able to take notes, to rate every food we had
-                            to spend time and laughter, it was the most fun I ever experienced. Spendig all those times with you have been my most favorite memories everrr. 
-                            When you went here for art appre, you weren't even my crush yet but I kept staring at you T_T I was looking at you almost the whole time pero never caught you looking back AHDAHShAHDAHSDH. You drew something too sa sketchbook ni Ressiahh. 
-                            PS: it wasn't ressiah'ss, its mine HSAHDAHSDHA. I loooked at your drawing when yall went home naa, it was the cutest ever!! 
-                            And then, the following days, with all the tensions, we even played valorant together. You got bullied sa ML that time and valorant together was the comfort that we found, we stayed up so late pa nga even though we had class tomorrow. And then
-                            getting ringed the morning after that T_T During that Tagaytay trip, thought I wasn't messaging you as much, you were all over my thoughts T_T I took way more pics that I'm supposed to, with the intent of showing them to you.
-                            Heck, I even updated like we were so close na T_T And every trip that we went to, I took vids and pictures, hoping to share them with you. and even before that, the "Dates" that we had though they're really just errands for our group activity. Nagagaslight pa rin ako ni Elijah that they were dates,
-                            and then there's me completely denying it HASDHSHAHAH. And then comes our first date together, it was disastrous T_T I didn't know what to doo and wasn't even prepared for it. You know during that time, all my thoughts were focused on spending time with you since it would be the last day before our
-                            long break. Even though things went not as good that time. It was the most fun and it made that day more special for me. I'm really glad that we did. I sometimes lack the taste, given your "I know what I want" tounge, I have always admired that about you hsadhasdh.
-                            I have hard time choosing, often going with the easiest options, pero there was a time where you told me that you do the same as well T_T I hope to know more flavors, discover more foods, rate more restaurants and cafes
-                            with you, as well as create more memories for this story of us. 
-
-                            The times we spent with all the kiligs during the first month. I was under tension the whole time T_T Whenever you were near, I just freeze up. You're so damn beautiful, but I couldn't help but say na
-                            that's the least interesting thing about you. The way you handle things maturely, think things out, and how funny you can be, it's always an adorable fun times with you eh HAHASDHAHA. There're still lots of stuffs
-                            nga that I sometimes just don't expect from you, but totally expected of you. Lagi ko na lang naiisip na "I lucked out so much being with this girl." whenever those moments happens. 
-                            
-                        </p>
-                    </div>
-                    <div class="memory-image-box" onclick="revealPhoto(this)">
-                        <div class="image-placeholder">
-                            <span class="image-placeholder-icon">💖</span>
-                            <div class="image-placeholder-text"></div>
-                            <div class="image-placeholder-hint">Click to reveal</div>
-                        </div>
-                        <img class="memory-photo" src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=800&q=80" alt="Favorite Moment">
-                        <div class="reveal-overlay"></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Trip Memory -->
-            <div class="memory-item">
-                <div class="memory-header">
-                    <h3 class="memory-title">Arguments and Mistakes</h3>
-                    <p class="memory-date">with Love</p>
-                </div>
-                <div class="memory-content-wrapper">
-                    <div class="memory-text">
-                        <p class="memory-description">
-                            Just as we had lots of fun times together, there also lots of times where we had hard time understanding each other. Times na we felt heavy, where things might've feel like
-                            we aren't working out. It was really difficult din for both of us. But after everything po bun, each and every argument, I'm very glad that we're getting so much better. I'm so proud of us po. I love you, reii. And I wanna
-                            be the best person for you as well. All these times, memories, and stuffs that we had spent together, I really really treasure them a lot, bun. You are the most beautiful person and I always had the most beautiful memories whenever 
-                            I'm with you po. There was so much that happened, I feel so loved po. I feel so lucky about being with you and finally being your boyfriend. 
-                        </p>
-                    </div>
-                    <div class="memory-image-box" onclick="revealPhoto(this)">
-                        <div class="image-placeholder">
-                            <span class="image-placeholder-icon">🌸</span>
-                            <div class="image-placeholder-text"></div>
-                            <div class="image-placeholder-hint"></div>
-                        </div>
-                        <img class="memory-photo" src="https://images.unsplash.com/photo-1502003148287-a82ef80a6abc?w=800&q=80" alt="Our Trip">
-                        <div class="reveal-overlay"></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Laugh Memory -->
-            <div class="memory-item">
-                <div class="memory-header">
-                    <h3 class="memory-title">For my Dearest, Rei</h3>
-                    <p class="memory-date"></p>
-                </div>
-                <div class="memory-content-wrapper">
-                    <div class="memory-text">
-                        <p class="memory-description">
-                            I love you. Thanks so much for everything. For loving me, for caring about me, for understanding me, and for learning things with me. I appreciate everything that you do, rei.
-                            I hope to spend more of this -sarries, special days, valentines, with you. And for them to get more special, the more we do them po. From learnings natin from the past, to living 
-                            and enjoying our present and growing into the future, I'm hoping to spend every single one with you po. I love you so much, my very very special, babyy. To my love, sweetheart, bunn, and to
-                            my Aleckxa, I love you <3
-                            MWAAAAA !! 
-                        </p>
-                    </div>
-                    <div class="memory-image-box" onclick="revealPhoto(this)">
-                        <div class="image-placeholder">
-                            <span class="image-placeholder-icon">😊</span>
-                            <div class="image-placeholder-text"></div>
-                            <div class="image-placeholder-hint"></div>
-                        </div>
-                        <img class="memory-photo" src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=800&q=80" alt="Laughter">
-                        <div class="reveal-overlay"></div>
-                    </div>
-                </div>
-            </div>
-
-            
-            
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <p>For the one who makes every day brighter<span class="footer-heart">♡</span></p>
-        <p>By your Bubbaa</p>
-    </footer>
-
-    <!-- Music Control -->
-    <div class="music-control" id="musicControl" title="Toggle Music">
-        <svg id="musicIcon" viewBox="0 0 24 24">
-            <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
-        </svg>
+    <div class="page-loader" id="loader">
+        <div class="loader-heart">💕</div>
     </div>
 
+    <div class="custom-cursor" id="cursor"></div>
+    <div class="cursor-follower" id="cursorFollower"></div>
+
+    <canvas id="particles-canvas"></canvas>
+
+    <div class="progress-bar" id="progressBar"></div>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+
+        // Main App Component
+        function App() {
+            const [scrollProgress, setScrollProgress] = useState(0);
+            const [musicPlaying, setMusicPlaying] = useState(false);
+            const audioRef = useRef(null);
+
+            useEffect(() => {
+                // Hide loader after 2 seconds
+                setTimeout(() => {
+                    document.getElementById('loader').classList.add('hidden');
+                }, 2000);
+
+                // Audio setup
+                audioRef.current = new Audio('song.mp3');
+                audioRef.current.loop = true;
+                audioRef.current.volume = 0.3;
+
+                // Scroll progress
+                const handleScroll = () => {
+                    const scrollTop = window.scrollY;
+                    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                    const progress = (scrollTop / docHeight) * 100;
+                    setScrollProgress(progress);
+
+                    // Reveal elements
+                    const reveals = document.querySelectorAll('.reveal');
+                    reveals.forEach(element => {
+                        const elementTop = element.getBoundingClientRect().top;
+                        const elementVisible = 150;
+                        if (elementTop < window.innerHeight - elementVisible) {
+                            element.classList.add('active');
+                        }
+                    });
+                };
+
+                window.addEventListener('scroll', handleScroll);
+                handleScroll();
+
+                return () => window.removeEventListener('scroll', handleScroll);
+            }, []);
+
+            const toggleMusic = () => {
+                if (musicPlaying) {
+                    audioRef.current.pause();
+                } else {
+                    audioRef.current.play().catch(e => console.log('Audio play failed:', e));
+                }
+                setMusicPlaying(!musicPlaying);
+            };
+
+            return (
+                <>
+                    <div className="progress-bar" style={{ width: `${scrollProgress}%` }}></div>
+                    
+                    <HeroSection />
+                    <TimelineSection />
+                    <Footer />
+                    
+                    <div 
+                        className={`music-fab ${musicPlaying ? 'playing' : ''}`}
+                        onClick={toggleMusic}
+                    >
+                        <svg className="music-icon" viewBox="0 0 24 24">
+                            {musicPlaying ? (
+                                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                            ) : (
+                                <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                            )}
+                        </svg>
+                    </div>
+                </>
+            );
+        }
+
+        // Hero Section Component
+        function HeroSection() {
+            const cardRef = useRef(null);
+
+            const handleMouseMove = (e) => {
+                if (!cardRef.current || window.innerWidth < 968) return;
+                
+                const card = cardRef.current;
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = (y - centerY) / 20;
+                const rotateY = (centerX - x) / 20;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            };
+
+            const handleMouseLeave = () => {
+                if (cardRef.current) {
+                    cardRef.current.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+                }
+            };
+
+            return (
+                <section className="hero">
+                    <div className="hero-blob"></div>
+                    <div 
+                        className="greeting-card reveal"
+                        ref={cardRef}
+                        onMouseMove={handleMouseMove}
+                        onMouseLeave={handleMouseLeave}
+                    >
+                        <div className="greeting-ornament">🌸✨🌸</div>
+                        <h1 className="hero-title">Happy Hearts Day</h1>
+                        <h2 className="hero-subtitle">& 1st Monthsary!</h2>
+                        <p className="hero-message">
+                            For the girl I love most, Happy Hearts and 1st Monthsary to us! 
+                            I'm very glad to spend this moment with you, rei. I love you.
+                        </p>
+                        <div className="hearts-container">
+                            <span className="heart">💕</span>
+                            <span className="heart">💖</span>
+                            <span className="heart">💕</span>
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        // Timeline Section Component
+        function TimelineSection() {
+            const memories = [
+                {
+                    title: "Time Went by so Fast",
+                    date: "Hopes for this time to Last Forever",
+                    text: "Happy 1st monthsarry, my Lovee !!! Time really went by so fast. I still remember dati where I still feel embarrassed just by being in the same room as you, tho embarrassing to admit, I was always tensed whenever you were around that time T_T and now, we're officially together celebrating our 1st month together. Though things might have been very hectic for this celebration, I'm still very glad —hoping that you are tooooo, to everything. To the efforts, thoughts, and love that we give each other. I feel so happy being able to greet you for our first month and first valentine oficially together :>",
+                    icon: "🌸"
+                },
+                {
+                    title: "Our Story Together",
+                    date: "Lots of First Times, and More First Times",
+                    text: "Our first month officially together, but almost a lifetime worth of memories with you. We been together for almost a year na, bunn, still can't believe it T_T. Countless amount of dates, Mcdo, Jollibees, cafes, and I'm glad to admit that all of them have been my first with you. To be able to take notes, to rate every food we had to spend time and laughter, it was the most fun I ever experienced. Spending all those times with you have been my most favorite memories everrr. When you went here for art appre, you weren't even my crush yet but I kept staring at you T_T I was looking at you almost the whole time pero never caught you looking back AHDAHShAHDAHSDH. You drew something too sa sketchbook ni Ressiahh. PS: it wasn't ressiah's, its mine HSAHDAHSDHA. I looked at your drawing when yall went home naa, it was the cutest ever!! And then, the following days, with all the tensions, we even played valorant together. You got bullied sa ML that time and valorant together was the comfort that we found, we stayed up so late pa nga even though we had class tomorrow. And then getting ringed the morning after that T_T During that Tagaytay trip, thought I wasn't messaging you as much, you were all over my thoughts T_T I took way more pics that I'm supposed to, with the intent of showing them to you. Heck, I even updated like we were so close na T_T And every trip that we went to, I took vids and pictures, hoping to share them with you. and even before that, the 'Dates' that we had though they're really just errands for our group activity. Nagagaslight pa rin ako ni Elijah that they were dates, and then there's me completely denying it HASDHSHAHAH. And then comes our first date together, it was disastrous T_T I didn't know what to doo and wasn't even prepared for it. You know during that time, all my thoughts were focused on spending time with you since it would be the last day before our long break. Even though things went not as good that time. It was the most fun and it made that day more special for me. I'm really glad that we did. I sometimes lack the taste, given your 'I know what I want' tounge, I have always admired that about you hsadhasdh. I have hard time choosing, often going with the easiest options, pero there was a time where you told me that you do the same as well T_T I hope to know more flavors, discover more foods, rate more restaurants and cafes with you, as well as create more memories for this story of us. The times we spent with all the kiligs during the first month. I was under tension the whole time T_T Whenever you were near, I just freeze up. You're so damn beautiful, but I couldn't help but say na that's the least interesting thing about you. The way you handle things maturely, think things out, and how funny you can be, it's always an adorable fun times with you eh HAHASDHAHA. There're still lots of stuffs nga that I sometimes just don't expect from you, but totally expected of you. Lagi ko na lang naiisip na 'I lucked out so much being with this girl.' whenever those moments happens.",
+                    icon: "💖"
+                },
+                {
+                    title: "Arguments and Mistakes",
+                    date: "with Love",
+                    text: "Just as we had lots of fun times together, there also lots of times where we had hard time understanding each other. Times na we felt heavy, where things might've feel like we aren't working out. It was really difficult din for both of us. But after everything po bun, each and every argument, I'm very glad that we're getting so much better. I'm so proud of us po. I love you, reii. And I wanna be the best person for you as well. And to personally witness and achieve the future we're both hoping and working towards for.",
+                    icon: "😊"
+                },
+                {
+                    title: "For my Dearest, Rei",
+                    date: "",
+                    text: "For my favorite letter, and for my favorite person. I love you. Thanks so much for everything. For loving me, for caring about me, for understanding me, and for learning things with me. I appreciate everything that you do, rei. I hope to spend more of this -sarries, special days, valentines, with you. And for them to get more special, the more we do them po. From learnings natin from the past, to living and enjoying our present and growing into the future, I'm hoping to spend every single one with you po. I love you so much, my very very special, babyy. To my love, sweetheart, bunn, and to my Aleckxa, I love you <3 MWAAAAA !!",
+                    icon: "🌸"
+                }
+            ];
+
+            return (
+                <section className="timeline-section">
+                    <div className="section-header reveal">
+                        <h2 className="section-title">A love letter, for myLove</h2>
+                        <p className="section-subtitle">
+                            Scroll po baby, carefully, gracefully, and as beautiful as you do. ♡
+                        </p>
+                    </div>
+
+                    <div className="timeline">
+                        {memories.map((memory, index) => (
+                            <MemoryItem key={index} memory={memory} index={index} />
+                        ))}
+                    </div>
+                </section>
+            );
+        }
+
+        // Memory Item Component
+        function MemoryItem({ memory, index }) {
+            const [revealed, setRevealed] = useState(false);
+
+            return (
+                <div className="timeline-item reveal">
+                    <div className="timeline-content">
+                        <div className="content-header">
+                            <h3 className="content-title">{memory.title}</h3>
+                            {memory.date && <p className="content-date">{memory.date}</p>}
+                        </div>
+                        <p className="content-text">{memory.text}</p>
+                    </div>
+
+                    <div className="timeline-image" onClick={() => setRevealed(!revealed)}>
+                        <div className="image-wrapper">
+                            <div className={`image-placeholder ${revealed ? 'hidden' : ''}`}>
+                                <div className="placeholder-icon">{memory.icon}</div>
+                                <div className="placeholder-text">Our Memory</div>
+                                <div className="click-hint">Click to reveal</div>
+                            </div>
+                            <img 
+                                className={`actual-photo ${revealed ? 'revealed' : ''}`}
+                                src={index === 0 ? 'photos/time-went-fast.jpg' :
+                                     index === 1 ? 'photos/our-story.jpg' :
+                                     index === 2 ? 'photos/arguments-love.jpg' :
+                                     'photos/for-rei.jpg'}
+                                alt="Memory"
+                            />
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        function Footer() {
+            return (
+                <footer className="footer">
+                    <div className="footer-content">
+                        <div className="footer-hearts">
+                            <span>💕</span>
+                            <span>💖</span>
+                            <span>💕</span>
+                        </div>
+                        <p className="footer-message">
+                            For the most amazing girly
+                        </p>
+                        <p className="footer-submessage">
+                            Thank you for being you, for every smile, every laugh, and every moment. 
+                            I love you so much, more than the amount of times I've said.
+                        </p>
+                        <p className="footer-signature">
+                            Forever yours ♡
+                        </p>
+                        <p className="footer-date">
+                            February 14, 2026 • Happy Hearts Day & 1st Monthsary
+                        </p>
+                    </div>
+                </footer>
+            );
+        }
+
+        // Render App
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+
     <script>
-        // Create floating petals
-        function createPetals() {
-            const container = document.getElementById('petalsContainer');
-            const petalCount = window.innerWidth < 768 ? 8 : 15;
-            
-            for (let i = 0; i < petalCount; i++) {
-                const petal = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-                petal.classList.add('petal');
-                petal.setAttribute('viewBox', '0 0 20 20');
-                petal.setAttribute('width', Math.random() * 15 + 10);
-                petal.setAttribute('height', Math.random() * 15 + 10);
-                
-                const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-                path.setAttribute('d', 'M10,2 Q15,5 10,10 Q5,5 10,2 Z');
-                path.setAttribute('fill', i % 2 === 0 ? 'var(--primary-pink)' : 'var(--blush)');
-                path.setAttribute('opacity', '0.6');
-                
-                petal.appendChild(path);
-                petal.style.left = Math.random() * 100 + '%';
-                petal.style.animationDelay = Math.random() * 15 + 's';
-                petal.style.animationDuration = (Math.random() * 10 + 10) + 's';
-                
-                container.appendChild(petal);
-            }
-        }
-
-        // Create floating lilies
-        function createFloatingLilies() {
-            const container = document.getElementById('floatingLilies');
-            const lilyCount = window.innerWidth < 768 ? 3 : 6;
-            
-            for (let i = 0; i < lilyCount; i++) {
-                const lily = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-                lily.classList.add('floating-lily');
-                lily.setAttribute('viewBox', '0 0 200 200');
-                lily.setAttribute('width', Math.random() * 40 + 40);
-                lily.setAttribute('height', Math.random() * 40 + 40);
-                
-                // Create lily petals
-                const petal1 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-                petal1.setAttribute('d', 'M100,180 Q80,120 100,60 Q120,120 100,180');
-                petal1.setAttribute('fill', 'var(--primary-pink)');
-                petal1.setAttribute('opacity', '0.3');
-                
-                const petal2 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-                petal2.setAttribute('d', 'M100,60 Q60,80 40,100 Q80,90 100,60');
-                petal2.setAttribute('fill', 'var(--blush)');
-                petal2.setAttribute('opacity', '0.4');
-                
-                const petal3 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-                petal3.setAttribute('d', 'M100,60 Q140,80 160,100 Q120,90 100,60');
-                petal3.setAttribute('fill', 'var(--blush)');
-                petal3.setAttribute('opacity', '0.4');
-                
-                const center = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-                center.setAttribute('cx', '100');
-                center.setAttribute('cy', '50');
-                center.setAttribute('r', '8');
-                center.setAttribute('fill', 'var(--deep-rose)');
-                center.setAttribute('opacity', '0.5');
-                
-                lily.appendChild(petal1);
-                lily.appendChild(petal2);
-                lily.appendChild(petal3);
-                lily.appendChild(center);
-                
-                lily.style.left = Math.random() * 100 + '%';
-                lily.style.animationDelay = Math.random() * 20 + 's';
-                lily.style.animationDuration = (Math.random() * 15 + 20) + 's';
-                
-                container.appendChild(lily);
-            }
-        }
-
-        // Create floating hearts
-        function createFloatingHearts() {
-            const container = document.getElementById('floatingHearts');
-            const heartCount = window.innerWidth < 768 ? 4 : 8;
-            
-            for (let i = 0; i < heartCount; i++) {
-                const heart = document.createElement('div');
-                heart.classList.add('floating-heart');
-                heart.textContent = ['💕', '💖', '💗', '💝'][Math.floor(Math.random() * 4)];
-                
-                heart.style.left = Math.random() * 100 + '%';
-                heart.style.animationDelay = Math.random() * 15 + 's';
-                heart.style.animationDuration = (Math.random() * 10 + 15) + 's';
-                
-                container.appendChild(heart);
-            }
-        }
-
-        // Add sparkles to memory items when they appear
-        function addSparkles(element) {
-            const sparkleCount = 8;
-            for (let i = 0; i < sparkleCount; i++) {
-                const sparkle = document.createElement('div');
-                sparkle.classList.add('sparkle');
-                sparkle.style.left = Math.random() * 100 + '%';
-                sparkle.style.top = Math.random() * 100 + '%';
-                sparkle.style.animationDelay = Math.random() * 3 + 's';
-                element.appendChild(sparkle);
-            }
-        }
-
-        // Cursor spotlight effect
-        const cursorLight = document.getElementById('cursorLight');
-        let mouseX = 0;
-        let mouseY = 0;
-        let currentX = 0;
-        let currentY = 0;
+        // Custom Cursor
+        const cursor = document.getElementById('cursor');
+        const follower = document.getElementById('cursorFollower');
+        
+        let mouseX = 0, mouseY = 0;
+        let followerX = 0, followerY = 0;
 
         document.addEventListener('mousemove', (e) => {
             mouseX = e.clientX;
             mouseY = e.clientY;
+            cursor.style.left = mouseX + 'px';
+            cursor.style.top = mouseY + 'px';
         });
 
-        function animateCursor() {
-            // Smooth follow effect
-            currentX += (mouseX - currentX) * 0.1;
-            currentY += (mouseY - currentY) * 0.1;
+        function animateFollower() {
+            const dx = mouseX - followerX;
+            const dy = mouseY - followerY;
             
-            cursorLight.style.left = currentX + 'px';
-            cursorLight.style.top = currentY + 'px';
+            followerX += dx * 0.1;
+            followerY += dy * 0.1;
             
-            requestAnimationFrame(animateCursor);
+            follower.style.left = followerX + 'px';
+            follower.style.top = followerY + 'px';
+            
+            requestAnimationFrame(animateFollower);
         }
+        animateFollower();
 
-        animateCursor();
+        // Particles
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
 
-        createPetals();
-        createFloatingLilies();
-        createFloatingHearts();
+        const particles = [];
+        const particleCount = 50;
 
-        // Add sparkles to memory items
-        document.querySelectorAll('.memory-item').forEach(item => {
-            addSparkles(item);
-        });
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 3 + 1;
+                this.speedX = Math.random() * 0.5 - 0.25;
+                this.speedY = Math.random() * 0.5 - 0.25;
+                this.opacity = Math.random() * 0.5 + 0.2;
+            }
 
-        // Intersection Observer for scroll animations
-        const observerOptions = {
-            threshold: 0.2,
-            rootMargin: '0px 0px -100px 0px'
-        };
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
+                if (this.x > canvas.width) this.x = 0;
+                if (this.x < 0) this.x = canvas.width;
+                if (this.y > canvas.height) this.y = 0;
+                if (this.y < 0) this.y = canvas.height;
+            }
 
-        // Observe section titles and memory items
-        document.querySelectorAll('.section-title, .section-subtitle, .memory-item').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Photo reveal function
-        function revealPhoto(box) {
-            if (!box.classList.contains('revealed')) {
-                box.classList.add('revealed');
-                
-                // Optional: Add a subtle vibration effect on mobile
-                if (navigator.vibrate) {
-                    navigator.vibrate(50);
-                }
+            draw() {
+                ctx.fillStyle = `rgba(212, 66, 107, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
             }
         }
 
-        // Enhanced Music Control with Autoplay
-        let isMusicPlaying = false;
-        const musicControl = document.getElementById('musicControl');
-        const musicIcon = document.getElementById('musicIcon');
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
+        }
 
-        // SETUP INSTRUCTIONS:
-        // 1. Place your music file (MP3, WAV, or OGG format) in the same folder as this HTML file
-        // 2. Replace 'your-music-file.mp3' below with your actual filename
-        // 3. For example: const audio = new Audio('romantic-song.mp3');
-        
-        // Uncomment and edit the line below:
-        const audio = new Audio('song.mp3');
-        
-        // For testing, you can use a placeholder URL:
-        // const audio = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
-        
-        // Once you uncomment the audio line above, uncomment the code below:
-        
-        
-        audio.loop = true;
-        audio.volume = 0.3; // Set volume to 30% (adjust between 0.0 and 1.0)
-
-        // Attempt autoplay when page loads
-        window.addEventListener('load', () => {
-            // Try to play automatically
-            audio.play().then(() => {
-                isMusicPlaying = true;
-                musicControl.classList.add('playing');
-                musicIcon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
-            }).catch(() => {
-                // Autoplay blocked by browser - user needs to click
-                console.log('Autoplay blocked. Click the music button to play.');
-                isMusicPlaying = false;
-                musicControl.classList.add('paused');
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
             });
-        });
 
-        // Music control button click handler
-        musicControl.addEventListener('click', () => {
-            if (isMusicPlaying) {
-                audio.pause();
-                musicIcon.innerHTML = '<path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>';
-                musicControl.classList.remove('playing');
-                musicControl.classList.add('paused');
-            } else {
-                audio.play();
-                musicIcon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
-                musicControl.classList.remove('paused');
-                musicControl.classList.add('playing');
-            }
-            isMusicPlaying = !isMusicPlaying;
-        });
-        
+            requestAnimationFrame(animateParticles);
+        }
 
-        // Smooth scroll behavior
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
+        animateParticles();
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
         });
     </script>
 </body>
